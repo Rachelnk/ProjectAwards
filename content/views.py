@@ -11,8 +11,15 @@ from .models import Portfolio, Profile, Rating
 from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
+
+def loginUser(request):
+  return render (request,'login.html')
+
 @login_required(login_url='login')
 def index(request):
   return render(request, "index.html")
+
+def register(request):
+  return render(request, 'register.html')
 
 
