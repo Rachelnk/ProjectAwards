@@ -34,7 +34,8 @@ def loginUser(request):
 
 @login_required(login_url='login')
 def index(request):
-  return render(request, "index.html")
+  portfolio = Portfolio.objects.all()
+  return render(request, "index.html", {'portfolio':portfolio})
 
 def register(request):
   return render(request, 'register.html')
