@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from awards import settings
-from .forms import UpdateUserForm, UpdateProfileForm, AddPostForm
+# from .forms import UpdateUserForm, UpdateProfileForm, AddPostForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Portfolio, Profile, Rating
