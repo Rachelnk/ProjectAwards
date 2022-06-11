@@ -33,6 +33,12 @@ def loginUser(request):
   return render (request,'login.html')
 
 @login_required(login_url='login')
+def logout(request):
+    logout(request)
+    messages.success(request, 'Successfully Logged Out!')
+    return redirect(reverse('login'))
+
+@login_required(login_url='login')
 def index(request):
   portfolio = Portfolio.objects.all()
   return render(request, "index.html", {'portfolio':portfolio})
