@@ -39,3 +39,14 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_image', 'profession', 'bio', 'location', 'personal_website', 'github_link', 'instagram_link', 'linkedin_link', 'twitter_link']
+
+class RatingForm(forms.ModelForm):
+  usability = forms.IntegerField(required=True, label_suffix=" : ", min_value=1, max_value=10,widget=forms.NumberInput(attrs={'class': 'form-control mb-4', 'placeholder':'Usability Rating'}))
+
+  design = forms.IntegerField(required=True, label_suffix=" : ", min_value=1, max_value=10,widget=forms.NumberInput(attrs={'class': 'form-control mb-4', 'placeholder':'Design Rating'}))
+
+  content = forms.IntegerField(required=True, label_suffix=" : ", min_value=1, max_value=10,widget=forms.NumberInput(attrs={'class': 'form-control mb-4', 'placeholder':'Content Rating'}))
+
+  class Meta:
+      model = Rating
+      fields = ['usability', 'design', 'content']
