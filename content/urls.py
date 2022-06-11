@@ -7,5 +7,6 @@ urlpatterns = [
   re_path('register', views.register, name='register'),
   re_path(r'^myprofile/(?P<username>\w{0,50})/$', views.myprofile, name='myprofile'),
   re_path(r'^userprofile/(?P<username>\w{0.50}/$)', views.userprofile, name='userprofile'),
+  re_path(r'^userprofile/(?P<username>\w{0.50})/edit/$', views.editprofile, name='editprofile'),
 
 ]
