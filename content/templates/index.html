@@ -1,1 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class = "container-fluid banner" id = "banner-cont">
+  <form class="form-inline my-2 my-md-0"  action="/search" role="search">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Category i.e. Art" name="category" aria-label="Search">
+    <button class="btn btn-info btn-md my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</div>
+
+{% endblock %}

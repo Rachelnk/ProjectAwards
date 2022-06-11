@@ -13,7 +13,7 @@ class AddPortfolioForm(forms.ModelForm):
 
     class Meta:
       model = Portfolio
-      fields = ['portfolio_image', 'title', 'caption', 'category', 'primary_language', 'portfolio_site_url', 'repo_url']
+      fields = ['portfolio_image', 'title', 'caption', 'category', 'programming_language', 'portfolio_site_url', 'repo_url']
 
 class UpdateUserForm(forms.ModelForm):
     first_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from awards import settings
-# from .forms import UpdateUserForm, UpdateProfileForm, AddPostForm
+from .forms import UpdateUserForm, UpdateProfileForm, AddPortfolioForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Portfolio, Profile, Rating
@@ -70,5 +70,42 @@ def register(request):
         user.save()        
   
   return render(request, 'register.html')
+
+@login_required(login_url='login')
+def addportfolio(request):
+    form = AddPortfolioForm()
+    if request.method == "POST":
+        form = AddPortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.author = request.user
+            portfolio.profile = request.user.profile
+            portfolio.save()
+            messages.success(request, 'Your Project Was Created Successfully!')
+            return redirect('index')
+        else:
+            messages.error(request, "Your Project Wasn't Created!")
+            return redirect('addportfolio')
+    else:
+        form = AddPortfolioForm()
+    return render(request, 'addportfolio.html', {'form':form})
+
+@login_required(login_url='login')
+def myprofile(request):
+    return render(request, 'myprofile.html')
+    
+def userprofile(request):
+    return render(request, 'userprofile.html')
+
+@login_required(login_url='login')
+def editprofile(request):
+    return render(request, 'editprofile.html')
+
+def search(request):
+    return render(request, 'search_results.html')
+
+@login_required(login_url='login')
+def settings(request):
+    return render(request, 'settings.html')
 
 
