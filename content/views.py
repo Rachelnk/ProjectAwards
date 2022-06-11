@@ -32,7 +32,7 @@ def loginUser(request):
             return redirect(reverse('index'))
   return render (request,'login.html')
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def index(request):
   portfolio = Portfolio.objects.all()
   return render(request, "index.html", {'portfolio':portfolio})
