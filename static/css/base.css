@@ -17,3 +17,9 @@ a:hover{
   text-decoration: none;
   color: #000000;
 }
+.signup-form {
+	width: 350px;
+	margin: 30px auto;
+  border: 1px solid #dbdbdb;
+  background-color: #fff;
+}
