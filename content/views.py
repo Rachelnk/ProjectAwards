@@ -158,7 +158,7 @@ def editportfolio(request, username, id):
 
     return render(request, 'editportfolio.html', {'form': form})
 
-@login_required(login_url='Login')
+@login_required(login_url='login')
 def deleteportfolio(request, username, title):
     portfolio = Portfolio.objects.get(title=title)
     if portfolio:
@@ -168,6 +168,35 @@ def deleteportfolio(request, username, title):
     else:
         messages.error(request, "Your Portfolio Wasn't Deleted!")
         return redirect('myportfolio', username=username)
+
+@login_required(login_url='Login')
+def myprofile(request, username):
+    profile = User.objects.get(username=username)
+    profile_details = Profile.objects.get(author = profile.id)
+    return render(request, 'myprofile.html', {'profile':profile, 'profile_details':profile_details})
+
+def portfoliodetails(request, title):
+    portfolio = Portfolio.objects.get(title=title)
+    ratings = Rating.objects.filter(portfolio = portfolio.id).all()
+    ratings_count = Rating.objects.filter(portfolio = portfolio.id)
+    return render(request, 'project_details.html', {'portfolio':portfolio, 'ratings':ratings, 'ratings_count':ratings_count})
+
+def userprofile(request, username):
+    profile = User.objects.get(username=username)
+    profile_details = Profile.objects.get(author = profile.id)
+    portfolio_details = Portfolio.objects.filter(author = profile.id).all()
+    return render(request, 'userprofile.html', {'profile':profile, 'profile_details':profile_details, 'portfolio_details':portfolio_details})
+
+def search(request):
+    if request.method == 'POST':
+        search = request.POST['imageSearch']
+        portfolios = Portfolio.objects.filter(title__icontains = search).all()
+        return render(request, 'search_results.html', {'search':search, 'portfolios':portfolios})
+    else:
+        return render(request, 'search_results.html')
+
+
+
 
 
 
