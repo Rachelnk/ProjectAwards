@@ -132,3 +132,11 @@ def settings(request):
     return render(request, 'settings.html')
 
 
+@login_required(login_url='login')
+def myportfolio(request, username):
+    profile = User.objects.get(username=username)
+    portfolio_details = Portfolio.objects.filter(author = profile.id).all()
+    return render(request, 'myportfolio.html', {'profile':profile, 'portfolio_details':portfolio_details})
+
+
+
