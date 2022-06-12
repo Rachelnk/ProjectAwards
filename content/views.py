@@ -136,7 +136,7 @@ def settings(request):
 def myportfolio(request, username):
     profile = User.objects.get(username=username)
     portfolio_details = Portfolio.objects.filter(author = profile.id).all()
-    return render(request, 'myportfolio.html', {'profile':profile, 'portfolio_details':portfolio_details})
+    return render(request, 'myproject.html', {'profile':profile, 'portfolio_details':portfolio_details})
 
 
 @login_required(login_url='login')
@@ -157,6 +157,17 @@ def editportfolio(request, username, id):
         form = AddPortfolioForm(instance=portfolio)
 
     return render(request, 'editportfolio.html', {'form': form})
+
+@login_required(login_url='Login')
+def deleteportfolio(request, username, title):
+    portfolio = Portfolio.objects.get(title=title)
+    if portfolio:
+        portfolio.delete()
+        messages.success(request, 'Your Portfolio Has Been Deleted Successfully!')
+        return redirect('myportfolio', username=username)
+    else:
+        messages.error(request, "Your Portfolio Wasn't Deleted!")
+        return redirect('myportfolio', username=username)
 
 
 
