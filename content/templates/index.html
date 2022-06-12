@@ -23,8 +23,34 @@
 
   {% if portfolios %}
   <div class="row">
+    {% for portfolio in portfolios %}
+    <div class="col-sm-4">
+      <div class="card-columns">
+      <div class="card">
+        <a href="/portfolio/{{ portfolio.title }}/details" name="">
+          <img src="/static/img/banner3.jpg" class="card-img-top" style="border-radius: 10px 10px 0px 0px;" alt="...">
+          {{ portfolio.photo.url }}
+        </a>
+        <div class="card-body">
+          <h4 class="card-title"> Testing {{ portfolio.title }}</h4>
+          <p class="card-text">{{ portfolio.caption|truncatewords:15}}</p>
+          <div class="" style="float:right">
+            <h6> <span class="">By{{portfolio.user.username}}</span> </h6>
+
+          </div> 
+
+          <div class="" style="float:left">
+
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>  
+    {% endfor %}  
     
   </div>
+  {% else %}
+  {% endif %}
 
 </div>
 

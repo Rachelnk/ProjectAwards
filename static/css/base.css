@@ -263,3 +263,12 @@ a:hover{
     width: 100%;
     font-size: 12px;
 }
+
+/* .card{
+  background-color: #000;
+} */
+
+
+.msg-container{
+  text-align:center;
+}

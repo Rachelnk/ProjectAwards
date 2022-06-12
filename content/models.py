@@ -33,19 +33,23 @@ class Profile(models.Model):
     
     
     def __str__(self):
-      return str(self.user)
+      return str(self.id)
 
     class Meta:
         verbose_name_plural = 'Profiles'
 
 class Portfolio(models.Model):
-    title = models.CharField(max_length=155)
-    url = models.URLField(max_length=255)
-    description = models.TextField(max_length=255)
-    technologies = models.CharField(max_length=200, blank=True)
-    photo = CloudinaryField('image')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
-    date = models.DateTimeField(auto_now_add=True, blank=True)
+    portfolio_image = CloudinaryField('portfolio_image', null= True)
+    title = models.CharField(max_length=500, verbose_name='Title', null=True)
+    caption = models.CharField(max_length=2200, verbose_name='Caption', null=True)
+    portfolio_site_url = models.URLField(max_length=500, verbose_name="Webiste Link", null=True, blank=True)
+    repo_url = models.URLField(max_length=500, verbose_name="GitHub Repository", null=True)
+    programming_language = models.CharField(max_length=500, verbose_name='Programming Language', null=True)
+    category = models.CharField(max_length=500, verbose_name='Category', null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Author', null = True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Profile', null =True)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created', null= True)
+    date_updated = models.DateTimeField(auto_now=True, verbose_name='Date Updated', null= True)
 
     def __str__(self):
       return str(self.title)

@@ -1,4 +1,3 @@
-from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -34,12 +33,11 @@ def loginUser(request):
   return render (request,'login.html')
 
 @login_required(login_url='login')
-def logout(request):
+def logoutUser(request):
     logout(request)
     messages.success(request, 'Successfully Logged Out!')
-    return redirect(reverse('login'))
+    return redirect('index')
 
-@login_required(login_url='login')
 def index(request):
   portfolios = Portfolio.objects.all()
   return render(request, "index.html", {'portfolios':portfolios})
@@ -91,7 +89,7 @@ def addportfolio(request):
         form = AddPortfolioForm()
     return render(request, 'addportfolio.html', {'form':form})
 
-def portfoliodetails(request):
+def portfoliodetails(request, title):
     project = Portfolio.objects.get(title=title)
     ratings = Rating.objects.filter(project = project.id).all()
     ratings_no = Rating.objects.filter(project = project.id)
