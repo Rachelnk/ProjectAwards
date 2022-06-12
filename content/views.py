@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -40,8 +41,8 @@ def logout(request):
 
 @login_required(login_url='login')
 def index(request):
-  portfolio = Portfolio.objects.all()
-  return render(request, "index.html", {'portfolio':portfolio})
+  portfolios = Portfolio.objects.all()
+  return render(request, "index.html", {'portfolios':portfolios})
 
 def register(request):
   if request.method == 'POST':
@@ -89,6 +90,13 @@ def addportfolio(request):
     else:
         form = AddPortfolioForm()
     return render(request, 'addportfolio.html', {'form':form})
+
+def portfoliodetails(request):
+    project = Portfolio.objects.get(title=title)
+    ratings = Rating.objects.filter(project = project.id).all()
+    ratings_no = Rating.objects.filter(project = project.id)
+    return render (request, 'portfolio_details.html', {'project': project , 'ratings': ratings, 'ratings_no':ratings_no})
+
 
 @login_required(login_url='login')
 def myprofile(request):

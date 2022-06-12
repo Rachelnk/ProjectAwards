@@ -1,6 +1,6 @@
 
 body{
-  background-color: #000000;
+  background-color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   
@@ -35,14 +35,16 @@ input.form-control {
 	border-radius: 10px;
 }
 
-#banner-cont{
+.banner{
   text-align: center;
   margin-top: 80px;
-  background-image: url('/static/img/banner3.jpg');
-  -webkit-background-size: cover;
+  background-image: url('/static/img/banner.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  /* -webkit-background-size: cover;
   -o-background-size: cover;
   -ms-background-size: cover;
-  -moz-background-size: cover;
+  -moz-background-size: cover; */
   min-height: 350px;
   padding-top: 50px;  
   background-size: cover;
@@ -54,7 +56,7 @@ input.form-control {
 .cover{
 	min-height: 350px;
 	width: inherit;
-	background: rgba(0,0,0,0.5)
+	/* background: rgba(0,0,0,0.5) */
 }
 
 
