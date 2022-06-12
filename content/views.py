@@ -87,7 +87,7 @@ def addportfolio(request):
             return redirect('addportfolio')
     else:
         form = AddPortfolioForm()
-    return render(request, 'addportfolio.html', {'form':form, })
+    return render(request, 'addproject.html', {'form':form, })
 
 def portfoliodetails(request, title):
     project = Portfolio.objects.get(title=title)

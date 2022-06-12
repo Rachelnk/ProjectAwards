@@ -3,7 +3,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm bg-black">
         <div class="container">
-            <a href="{% url 'addportfolio' %}" name = 'addportfolio' class="logo">
+            <a href="{% url 'addproject' %}" name = 'addproject' class="logo">
                 <i class="fa-solid fa-plus"></i> Add Portfolio
                 <!-- <img src={% static "img/tpalogo.png" %} alt="" width="180"> -->
             </a>
@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 
                 <div class="d-flex">
-                    <a href="{% url 'addportfolio' %}" name="AddPortfolio" style="margin-right: 20px;">
+                    <a href="{% url 'addproject.html' %}" name="AddPortfolio" style="margin-right: 20px;">
                         <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Portfolio</button>
                     </a>
                 {% if user.is_authenticated %}

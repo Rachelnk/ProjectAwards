@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="menu-container">
+        {% include 'navbar.html' %}
+    </div>
+
+    <div class="container-fluid" style="margin-top: 70px;">
+        <div class="main-body">
+            <center>
+                {% if messages %}
+                    {% for message in messages %} 
+                    <div class="alert {{message.tags}} m-1" role="alert" style="font-size: medium; margin-bottom: 30px;">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %} 
+                {% endif %}
+            </center>
+            <h1 class="text-center py-3">My Portfolio</h1>
+        
+            <div class="row">
+                {% if portfolio_details %}
+                    {% for portfolio in portfolio_details %}
+                        <div class="col-sm-4">
+                            <div class="card shadow" style="margin-bottom: 30px; border-radius: 10px;">
+                                <a href="/portfolio/{{ portfolio.title }}/details" name="">
+                                    <img src="{{ portfolio.portfolio_image.url }}" class="card-img-top" style="border-radius: 10px 10px 0px 0px;" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ portfolio.title }}</h5>
+                                    <p class="card-text text-muted">{{ portfolio.caption|truncatewords:23 }}</p>
+                                    <div class="badge" style="float:left">
+                                        <h6><span style="font-weight: lighter;">Language:</span> {{ portfolio.primary_language }}</h6>
+                                    </div>
+                                    <div class="basge" style="float:right">
+                                        <h6><span class="badge badge-primary">{{ portfolio.category }}</span></h6>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <div class="d-flex flex-row user-info">
+                                        {% if portfolio.profile.profile_image.url %}
+                                            <img class="rounded" src="{{ portfolio.profile.profile_image.url }}" height="40" width="40">
+                                        {% else %}
+                                            <img class="rounded" src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-8.png" height="40" width="40">
+                                        {% endif %}
+                                        <div class="d-flex flex-column justify-content-start ml-2">
+                                            <a href="#">
+                                                <span class="name"><b>{{ portfolio.author.first_name }} {{ portfolio.author.last_name }}</b></span>
+                                            </a>
+                                            <span class="date"><i class="fas fa-calendar-alt"></i> {{ portfolio.date_created }}</span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                    <div style="float: right;">
+                                        <a href="/profile/{{ portfolio.author.username }}/portfolio/{{ portfolio.id }}/edit">
+                                            <button class="btn btn-success btn-sm" style="border-radius: 3px;"><i class="fa-solid fa-edit"></i> Edit</button>
+                                        </a>
+                                        <button class="btn btn-danger btn-sm" style="border-radius: 3px;" data-toggle="modal" data-target="#exampleModal{{ portfolio.id }}"><i class="fa-solid fa-trash"></i> Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-sm-12" style="margin-top: 20px;">
+                        <div class="content text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M20 2H8c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM8 16V4h12l.002 12H8z"></path><path d="M4 8H2v12c0 1.103.897 2 2 2h12v-2H4V8z"></path><path d="m12 12-1-1-2 3h10l-4-6z"></path></svg>
+                            <br>
+                            <h4 class="text-dark py-3">No Associated Portfolio Found</h4>
+                        </div> 
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>   
+
+    <!-- Modal -->
+    {% for portfolio in portfolio_details %}
+    <div class="modal fade" id="exampleModal{{ portfolio.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ portfolio.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel{{ portfolio.id }}">Delete Portfolio</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <p>Are you sure want to delete {{ portfolio.title }}? <span class="text-danger">(This can't be reverted)</span></p> 
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a href="/profile/{{portfolio.author.username}}/portfolio/{{portfolio.title}}/delete">
+                <button type="submit" class="btn btn-danger">Delete Portfolio</button>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
