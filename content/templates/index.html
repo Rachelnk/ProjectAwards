@@ -9,10 +9,10 @@
   <div class="cover">
     <div class = "container banner-cont">
       <h2>Browse through projects by other techies and leave reviews and ratings!</h2>
-      <form class="form"  action="{% url 'search_results' %}" role="search">
+      <form class="form"  action="{% url 'search_results' %}" role="search" method="post">
         {% csrf_token %}
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search For A Portfolio" name="projectSearch">
+                        <input type="text" class="form-control" placeholder="Search For A Project" name="projectSearch">
                     </div>
       </form>
     </div>
@@ -20,7 +20,7 @@
 </div>
 
 <div class="projects">
-  <h5 class ="text-center" style="margin: 10px ;">Available Projects</h5>
+  <h1 class ="text-center" style="margin: 20px; font-family: 'Alice', serif;">Available Projects</h5>
 
   {% if portfolios %}
   <div class="row">
@@ -33,11 +33,11 @@
         </a>
         <hr>
         <div class="card-body">
-          <h4 class="card-title"> {{ portfolio.title }}</h4>
+          <h4 class="card-title" style="font-family: 'Sanchez', serif;"> {{ portfolio.title }}</h4>
           <p class="card-text">{{ portfolio.caption|truncatewords:15}}</p>
           <hr>
           <div class="" style="float:left">
-            <h6> <span class="">By {{ portfolio.user.username }}</span> </h6>
+            <h6> <span class=" badge badge-primary">By: {{ portfolio.author.username }}</span> </h6>
 
           </div> 
 

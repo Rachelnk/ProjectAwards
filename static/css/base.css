@@ -5,6 +5,10 @@ body{
   font-size: 14px;
   
 }
+/* navbar home link */
+.home-link {
+  font-family: 'Press Start 2P', cursive;
+}
 /*--Banner--*/
 div.container.image{
   padding: 6em 0 0;

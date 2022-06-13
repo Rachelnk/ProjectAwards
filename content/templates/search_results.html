@@ -8,7 +8,7 @@
 <div class="banner">
   <div class="cover">
     <div class = "container banner-cont">
-      <h1 id="category" class="text-brown"> Search reasults for <span class="text-light">'{{ search }}'</span></h1>
+      
       <form class="form"  action="{% url 'search_results' %}" role="search">
         {% csrf_token %}
                     <div class="input-group">
@@ -22,32 +22,33 @@
 </div>
 
 <div class="main-section">
+    <h1 id="category" class="text-center" style="margin:20px; font-family: 'Alice', serif;"> Search results for <span >'{{ search }}'</span></h1>
   <div class="row">
       {% if portfolios %}
           <div class="row">
               {% for portfolio in portfolios %}
                   <div class="col-sm-4">
                       <div class="card shadow" style="margin-bottom: 30px; border-radius: 10px;">
-                          <a href="/portfolio/{{ portfolio.title }}/details" name="">
+                          <a href="/project/{{ portfolio.title }}/details" name="">
                               <img src="{{ portfolio.portfolio_image.url }}" class="card-img-top" style="border-radius: 10px 10px 0px 0px;" alt="...">
                           </a>
                           <div class="card-body">
                               <h5 class="card-title">{{ portfolio.title }}</h5>
                               <p class="card-text text-muted">{{ portfolio.caption|truncatewords:23 }}</p>
                               <div class="badge" style="float:left">
-                                  <h6><span style="font-weight: lighter;">Language:</span> {{ portfolio.primary_language }}</h6>
+                                  <h6>Language: <span class="badge badge-primary"> {{ portfolio.programming_language }} </span></h6>
                               </div>
                               <div class="basge" style="float:right">
-                                  <h6><span class="badge badge-primary">{{ portfolio.category }}</span></h6>
+                                  <h6> Category: <span class="badge badge-primary">{{ portfolio.category }}</span></h6>
                               </div>
                               <br>
                               <hr>
                               <div class="d-flex flex-row user-info">
-                                  {% if portfolio.profile.profile_image.url %}
+                                  <!-- {% if portfolio.profile.profile_image.url %}
                                       <img class="rounded" src="{{ portfolio.profile.profile_image.url }}" height="40" width="40">
                                   {% else %}
                                       <img class="rounded" src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-8.png" height="40" width="40">
-                                  {% endif %}
+                                  {% endif %} -->
                                   <div class="d-flex flex-column justify-content-start ml-2">
                                       <a href="/user/{{ portfolio.author.username }}">
                                           <span class="name"><b>{{ portfolio.author.first_name }} {{ portfolio.author.last_name }}</b></span>

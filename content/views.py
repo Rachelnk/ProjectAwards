@@ -123,13 +123,6 @@ def editprofile(request, username):
 
     return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form})
 
-def search(request):
-    if request.method == 'POST':
-        search = request.POST['projectSearch']
-        portfolios = Portfolio.objects.filter(title__icontains = search).all()
-        return render(request, 'search_results.html', {'search': search, 'portfolios': portfolios})
-    else:
-        return render(request, 'search_results.html')
 
 @login_required(login_url='login')
 def settings(request):
@@ -193,7 +186,7 @@ def userprofile(request, username):
 
 def search(request):
     if request.method == 'POST':
-        search = request.POST['imageSearch']
+        search = request.POST['projectSearch']
         portfolios = Portfolio.objects.filter(title__icontains = search).all()
         return render(request, 'search_results.html', {'search':search, 'portfolios':portfolios})
     else:

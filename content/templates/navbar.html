@@ -3,9 +3,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm bg-black">
         <div class="container">
-            <a href="{% url 'addproject' %}" name = 'addproject' class="logo">
-                <i class="fa-solid fa-plus"></i> Add Project
-                <!-- <img src={% static "img/tpalogo.png" %} alt="" width="180"> -->
+            <a href="{% url 'index' %}" name = '' class="home-link" style="font-family: 'Press Start 2P', cursive; font-size: 20px;">
+                <i class="fa-solid fa-plus"></i> Tech Project Awards
+                
             </a>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
@@ -15,7 +15,7 @@
                 
                 <div class="d-flex">
                     <a href="{% url 'addproject' %}" name="AddPortfolio" style="margin-right: 20px;">
-                        <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Portfolio</button>
+                        <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Project</button>
                     </a>
                 {% if user.is_authenticated %}
                     <div class="dropdown">
