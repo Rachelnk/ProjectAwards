@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
 
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='User', null=True)
+    author = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='User', null=True)
     profile_pic = CloudinaryField('image')
     bio = models.TextField()
     username = models.CharField(max_length=60)
@@ -21,11 +23,11 @@ class Profile(models.Model):
     twitter_link = models.URLField(max_length=500, verbose_name="Twitter Link", null=True, blank=True)
 
 
-    def save_profile(self):
-        self.save()
+    # def save_profile(self):
+    #     self.save()
 
-    def delete_profile(self):
-        self.delete()
+    # def delete_profile(self):
+    #     self.delete()
 
     # @classmethod
     # def search_profile(cls, name):
@@ -34,12 +36,21 @@ class Profile(models.Model):
     
     def __str__(self):
       return str(self.id)
+    
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
+
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.profile.save()
 
     class Meta:
         verbose_name_plural = 'Profiles'
 
 class Portfolio(models.Model):
-    portfolio_image = CloudinaryField('portfolio_image', null= True)
+    portfolio_image = CloudinaryField('image', null= True)
     title = models.CharField(max_length=500, verbose_name='Title', null=True)
     caption = models.CharField(max_length=2200, verbose_name='Caption', null=True)
     portfolio_site_url = models.URLField(max_length=500, verbose_name="Webiste Link", null=True, blank=True)

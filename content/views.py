@@ -96,13 +96,12 @@ def portfoliodetails(request, title):
     return render (request, 'portfolio_details.html', {'project': project , 'ratings': ratings, 'ratings_no':ratings_no})
 
 
-@login_required(login_url='login')
-def myprofile(request):
-    return render(request, 'myprofile.html')
+def userprofile(request, username):
+    profile = User.objects.get(username=username)
+    profile_details = Profile.objects.get(author = profile.id)
+    portfolio_details = Portfolio.objects.filter(author = profile.id).all()
+    return render(request, 'userprofile.html', {'profile':profile, 'profile_details':profile_details, 'portfolio_details':portfolio_details})
     
-def userprofile(request):
-    return render(request, 'userprofile.html')
-
 @login_required(login_url='login')
 def editprofile(request, username):
     user = User.objects.get(username=username)
@@ -125,7 +124,12 @@ def editprofile(request, username):
     return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form})
 
 def search(request):
-    return render(request, 'search_results.html')
+    if request.method == 'POST':
+        search = request.POST['projectSearch']
+        portfolios = Portfolio.objects.filter(title__icontains = search).all()
+        return render(request, 'search_results.html', {'search': search, 'portfolios': portfolios})
+    else:
+        return render(request, 'search_results.html')
 
 @login_required(login_url='login')
 def settings(request):
@@ -169,7 +173,7 @@ def deleteportfolio(request, username, title):
         messages.error(request, "Your Portfolio Wasn't Deleted!")
         return redirect('myportfolio', username=username)
 
-@login_required(login_url='Login')
+@login_required(login_url='login')
 def myprofile(request, username):
     profile = User.objects.get(username=username)
     profile_details = Profile.objects.get(author = profile.id)

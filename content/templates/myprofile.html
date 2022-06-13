@@ -168,8 +168,8 @@
                                         <h6 class="mb-0">Country</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {% if profile_details.country %}
-                                        {{ profile_details.country }}
+                                        {% if profile_details.location %}
+                                        {{ profile_details.location }}
                                         {% else %}
                                         Not Selected
                                         {% endif %}
@@ -178,7 +178,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <a class="btn btn-primary" href="{% url 'EditProfile' user.username %}" name="EditProfile"><i class="fa-solid fa-edit"></i> Edit Profile Details</a>
+                                        <a class="btn btn-primary" href="{% url 'editprofile' user.username %}" name="EditProfile"><i class="fa-solid fa-edit"></i> Edit Profile Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -203,3 +203,5 @@
     
             </div>
         </div>   
+
+        {% endblock %}

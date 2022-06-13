@@ -1,6 +1,7 @@
 from django import forms 
 from django.contrib.auth.models import User
 from .models import Portfolio, Profile, Rating
+from cloudinary.forms import CloudinaryFileField
 
 class AddPortfolioForm(forms.ModelForm):
     portfolio_image = forms.ImageField(required=True, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
@@ -8,7 +9,7 @@ class AddPortfolioForm(forms.ModelForm):
     caption = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form-control mb-4', 'rows': 5, 'placeholder':'Portfolio Description'}))
     category = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder':'Portfolio Category i.e Professional'}))
     programming_language = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder':'Programming Language'}))
-    portfolio_site_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control mb-4', 'placeholder':'Portfolio URL'}))
+    portfolio_site_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control mb-4', 'placeholder':'Project URL'}))
     repo_url = forms.URLField(required=True, widget=forms.URLInput(attrs={'class': 'form-control mb-4', 'placeholder':'GitHub Repository'}))
 
     class Meta:
@@ -26,7 +27,12 @@ class UpdateUserForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'username', 'email']
 
 class UpdateProfileForm(forms.ModelForm):
-    profile_image = forms.ImageField(required=True, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    profile_image = CloudinaryFileField (label = '', options = { 'style': "margin-top: 30px",
+      'tags': "directly_uploaded",
+      'crop': 'limit', 'width': 1000, 'height': 1000,
+      'eager': [{ 'crop': 'fill', 'width': 150, 'height': 100 }]
+    })
+    # profile_image = forms.ImageField(required=True, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     profession = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder':'Profession'}))
     bio = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control mb-4', 'rows': 5}))
     location = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder':'location'}))
