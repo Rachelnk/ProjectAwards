@@ -146,7 +146,7 @@ def editportfolio(request, username, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your Portfolio Has Been Updated Successfully!')
-            return redirect('myportfolio', username=username)
+            return redirect('myproject', username=username)
         else:
             messages.error(request, "Your Portfolio Wasn't Updated!")
             return redirect('editportfolio', username=username)
@@ -161,10 +161,10 @@ def deleteportfolio(request, username, title):
     if portfolio:
         portfolio.delete()
         messages.success(request, 'Your Portfolio Has Been Deleted Successfully!')
-        return redirect('myportfolio', username=username)
+        return redirect('myproject', username=username)
     else:
         messages.error(request, "Your Portfolio Wasn't Deleted!")
-        return redirect('myportfolio', username=username)
+        return redirect('myproject', username=username)
 
 @login_required(login_url='login')
 def myprofile(request, username):
