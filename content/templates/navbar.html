@@ -72,6 +72,8 @@
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item text-center" href="{% url 'myprofile' user.username %}">Profile</a>
                             <hr>
+                            <a class="dropdown-item text-center" href="{% url 'myproject' user.username %}" name="MyProfile"><i class="fa-solid fa-user-large"></i> My Project</a>
+                            <hr>                            
                             <a class="dropdown-item text-center" href="{% url 'editprofile' user.username  %}"> Edit profile</a>
                             <hr>
                             <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
@@ -80,11 +82,15 @@
                         </div>
                     </li>
                     {% else %}
-                    <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
+                    <a href="{% url 'login' %}" class="login btn btn-sm btn-info" style="margin-right: 5px ;"> REGISTER/LOGIN </a>
                     {% endif %}
-                    <button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
-                        Submit your site
-                    </button>
+                    <a href="{% url 'addproject' %}" name="AddPortfolio" style="margin-right: 20px;">
+                        <button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
+                            Add a project
+                        </button>
+                    </a>
+                   
+                    
                 </ul>
             </div>
         </div>
