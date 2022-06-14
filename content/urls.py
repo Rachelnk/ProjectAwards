@@ -13,7 +13,7 @@ urlpatterns = [
   re_path(r'^project/add/$', views.addportfolio, name='addproject'),
   re_path(r'^profile/(?P<username>\w{0,50})/project/$', views.myportfolio, name="myproject"),
   re_path(r'^search-results/$', views.search, name="search_results"),
-  re_path(r'^project/(?P<title>\w{0,50})/details/$', views.portfoliodetails, name="project_details"),
+  re_path(r'^project/(?P<title>\w{0,50})\S/details/$', views.portfoliodetails, name="project_details"),
 
 
 ]

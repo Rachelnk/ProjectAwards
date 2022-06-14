@@ -8,7 +8,7 @@
 <div class="banner">
   <div class="cover">
     <div class = "container banner-cont">
-      <h2>Browse through projects by other techies and leave reviews and ratings!</h2>
+      <h2 style="font-family: 'Merienda', cursive;">Browse through projects by other techies and leave reviews and ratings!</h2>
       <form class="form"  action="{% url 'search_results' %}" role="search" method="post">
         {% csrf_token %}
                     <div class="input-group">
@@ -28,7 +28,7 @@
     <div class="col-sm-4">
       
       <div class="card">
-        <a href="/portfolio/{{ portfolio.title }}/details" name="">
+        <a href="/project/{{ portfolio.title }}/details" name="">
           <img src="{{ portfolio.portfolio_image.url }}" class="card-img-top" style="border-radius: 10px 10px 0px 0px;" alt="{{ portfolio.title }}">          
         </a>
         <hr>
