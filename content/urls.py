@@ -15,5 +15,6 @@ urlpatterns = [
   re_path(r'^search-results/$', views.search, name="search_results"),
   # re_path(r'^project/(?P<title>\w{0,50})\S/details/$', views.portfoliodetails, name="project_details"),
   path('project/<str:title>/details', views.portfoliodetails, name="project_details"),
+  path('profile/<str:username>/project/<str:title>/delete', views.deleteportfolio, name="deleteproject"),
 
 ]

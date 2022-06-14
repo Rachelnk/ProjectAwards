@@ -16,11 +16,14 @@
             {% endif %}
         </center>
     </div>
+    <div class="panel-heading">
+        <h3 class="text-center" style="margin: 20px; font-family: 'Alice', serif;">Register</h3>
+      </div>
     <div class="signup-form">
         <form action="" method="POST">
             {% csrf_token %}
             <h1 class="flex justify-content-center text-center" style="font-family: 'Press Start 2P', cursive;">
-                Tech Project Awards 
+              <a href="{% url 'index' %}" style="color:black"> Tech Project Awards</a>  
             </h1>
             <p class="text-muted text-center" style="font-family: 'Alice', serif;">Sign up to add projects to be rated and reviewed by your fellow techies.</p>
             <div class="panel register flex justify-content-center">

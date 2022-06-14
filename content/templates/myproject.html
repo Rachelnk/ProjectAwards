@@ -57,7 +57,7 @@
                                     </div>
                                     <br>
                                     <div style="float: right;">
-                                        <a href="/profile/{{ portfolio.author.username }}/portfolio/{{ portfolio.id }}/edit">
+                                        <a href="/profile/{{ portfolio.author.username }}/project/{{ portfolio.id }}/edit">
                                             <button class="btn btn-success btn-sm" style="border-radius: 3px;"><i class="fa-solid fa-edit"></i> Edit</button>
                                         </a>
                                         <button class="btn btn-danger btn-sm" style="border-radius: 3px;" data-toggle="modal" data-target="#exampleModal{{ portfolio.id }}"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -95,8 +95,8 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <a href="/profile/{{portfolio.author.username}}/portfolio/{{portfolio.title}}/delete">
-                <button type="submit" class="btn btn-danger">Delete Portfolio</button>
+            <a href="/profile/{{portfolio.author.username}}/project/{{portfolio.title}}/delete">
+                <button type="submit" class="btn btn-danger">Delete Project</button>
             </a>
             </div>
         </div>
