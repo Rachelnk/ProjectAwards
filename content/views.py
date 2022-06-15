@@ -89,11 +89,11 @@ def addportfolio(request):
         form = AddPortfolioForm()
     return render(request, 'addproject.html', {'form':form, })
 
-def portfoliodetails(request, title):
-    project = Portfolio.objects.get(title=title)
-    ratings = Rating.objects.filter(project = project.id).all()
-    ratings_no = Rating.objects.filter(project = project.id)
-    return render (request, 'portfolio_details.html', {'project': project , 'ratings': ratings, 'ratings_no':ratings_no})
+# def portfoliodetails(request, title):
+#     project = Portfolio.objects.get(title=title)
+#     ratings = Rating.objects.filter(project = project.id).all()
+#     ratings_no = Rating.objects.filter(project = project.id)
+#     return render (request, 'portfolio_details.html', {'project': project , 'ratings': ratings, 'ratings_no':ratings_no})
 
 
 def userprofile(request, username):
@@ -175,8 +175,48 @@ def myprofile(request, username):
 def portfoliodetails(request, title):
     portfolio = Portfolio.objects.get(title=title)
     ratings = Rating.objects.filter(portfolio = portfolio.id).all()
-    ratings_count = Rating.objects.filter(portfolio = portfolio.id)
-    return render(request, 'project_details.html', {'portfolio':portfolio, 'ratings':ratings, 'ratings_count':ratings_count})
+    # ratings_count = Rating.objects.filter(portfolio = portfolio.id)
+    form = RatingForm()
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.portfolio = portfolio
+            data.average = (data.design + data.usability + data.content+data.creativity)/4
+            data.save()
+            return redirect( 'portfolio', title) 
+    raters = []
+    design_ratings = []
+    usability_ratings = []
+    creativity_ratings = []
+    average = []
+
+    for rating in ratings:
+        raters.append(rating.user)
+        design_ratings.append(rating.design_rating)
+        usability_ratings.append(rating.usability_rating)
+        creativity_ratings.append(rating.creativity_rating)
+        average.append(rating.average)
+
+    ratings_count = ratings.count()
+
+    if ratings_count > 0:
+        portfolio.average_design = sum(design_ratings)/ratings_count
+        portfolio.average_usability = sum(usability_ratings)/ratings_count
+        portfolio.average_creativity = sum(creativity_ratings)/ratings_count
+
+        total_average = sum(average)/ratings_count
+        portfolio.average_score = total_average
+        portfolio.save()
+
+    else:
+        form = RatingForm()
+    
+    context = {'portfolio': portfolio, 'form': form, 'ratings':ratings, 'ratings_count':ratings_count, 'raters':raters,}
+    return render(request, 'project_details.html', context)
+
+    # return render(request, 'project_details.html', {'portfolio':portfolio, 'ratings':ratings, 'ratings_count':ratings_count})
 
 def userprofile(request, username):
     profile = User.objects.get(username=username)
