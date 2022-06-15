@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from awards import settings
-from .forms import UpdateUserForm, UpdateProfileForm, AddPortfolioForm
+from .forms import UpdateUserForm, UpdateProfileForm, AddPortfolioForm, RatingForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Portfolio, Profile, Rating
@@ -191,6 +191,36 @@ def search(request):
         return render(request, 'search_results.html', {'search':search, 'portfolios':portfolios})
     else:
         return render(request, 'search_results.html')
+
+@login_required(login_url='Login')
+def PortfolioRating(request,title):
+    if request.method == 'POST':
+        portfolio = Portfolio.objects.get(title = title)
+        current_user = request.user
+        comment = request.POST['comment']
+        design_rating = request.POST['design_rating']
+        usability_rating = request.POST['usability_rating']
+        content_rating = request.POST['content_rating']
+        creativity_rating = request.POST['creativity_rating']
+        experience_rating = request.POST['experience_rating']
+
+        Rating.objects.create(
+            portfolio = portfolio,
+            author = current_user,
+            profile = request.user.profile,
+            comment = comment,
+            design_rating = design_rating,
+            usability_rating = usability_rating,
+            content_rating = content_rating,
+            creativity_rating = creativity_rating,
+            experience_rating = experience_rating,
+            avarage_rating=round((float(design_rating) + float(usability_rating) + float(content_rating) + float(creativity_rating) + float(experience_rating))/5,2),)
+
+        messages.success(request, 'Your Review Has Been Created Successfully!')
+        return redirect('PortfolioDetails', title=title)
+    else:
+        messages.error(request, "Your Review Wasn't Created!")
+        return redirect('PortfolioDetails', title=title)
 
 
 
