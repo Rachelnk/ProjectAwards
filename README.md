@@ -4,7 +4,15 @@
 ##### This is an [Awwards](https://www.awwwards.com/) clone application whereby users can upload their projects and have them reviewed and rated by other users. The users can also view projects uploaded by other users, review and rate them. API endpoints are provided through Django REST Framework.
 
 ![landing page screenshot](https://github.com/Rachelnk/ProjectAwards/blob/main/Screenshots/index.png)
+
+# Get Profiles
+## https://tech-project-awards.herokuapp.com/api/profiles/
+
 ![Profiles API Endpoint](https://github.com/Rachelnk/ProjectAwards/blob/main/Screenshots/profile.png)
+
+# Get Projects
+## https://tech-project-awards.herokuapp.com/api/projects/
+
 ![Projects API Endpoint](https://github.com/Rachelnk/ProjectAwards/blob/main/Screenshots/portfolio.png)
 
 ## Authors
