@@ -20,6 +20,20 @@
 </div>
 
 <div class="projects">
+  <div class= "text-center" >
+    <span style="background-color: rgb(32, 219, 147);">
+    {% if messages %}
+        {% for message in messages %} 
+        <div class="alert {{message.tags}} m-1" role="alert" style="font-size: medium; margin-bottom: 30px;">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %} 
+    {% endif %}
+  </span>
+    </div>
   <h1 class ="text-center" style="margin: 20px; font-family: 'Alice', serif;">Available Projects</h5>
 
   {% if portfolios %}
