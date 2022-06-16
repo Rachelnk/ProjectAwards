@@ -63,3 +63,28 @@ class PortfolioTestClass(TestCase):
         self.portfolio.delete()
         Portfolios = Portfolio.objects.all()
         self.assertTrue(len(Portfolios) == 0)
+
+class RatingTestClass(TestCase):
+    def setUp(self):
+        user = User.objects.create(
+            username="ray",
+            first_name="ray",
+            last_name="kiarie",
+            email="ray@gmail.com"
+        )
+
+        self.portfolio = Portfolio(
+            portfolio_image = "default.jpg",
+            title="Project",
+            caption="Test Caption",
+            portfolio_site_url="url.com",
+            repo_url="github.com",
+            programming_language="python",
+            category="for practice",
+            author=user,
+            profile = user.profile
+        )
+
+        self.rating = Rating(comment = 'test comment',design_rating = 10,usability_rating = 10, content_rating = 9,avarage_rating = 9.5,author=user,profile = user.profile, portfolio = self.portfolio)
+        def test_instance(self):
+          self.assertTrue(isinstance(self.rating, Rating))
