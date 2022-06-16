@@ -160,3 +160,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'rest_framework.authentication.TokenAuthentication',
 #     )
 # }
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
