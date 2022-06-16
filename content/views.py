@@ -234,7 +234,7 @@ class ProfileList(APIView):
         serializers = ProfileSerializer(all_profiles, many=True)
         return Response(serializers.data)
 
-class Portfolio(APIView):
+class PortfolioList(APIView):
     def get(self, request, format=None):
         all_portfolios = Portfolio.objects.all()
         serializers = PortfoioSerializer(all_portfolios, many = True)
