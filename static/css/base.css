@@ -280,3 +280,38 @@ a:hover{
 .msg-container{
   text-align:center;
 }
+.details-x {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.details-x a {
+  color: aquamarine;
+}
+
+.rates-x {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 1rem;
+}
+
+.ratebox {
+  width: 6rem;
+  height: 6rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-size: 2rem;
+  outline: 3px solid mediumaquamarine;
+  border-radius: 50%;
+  margin: 2rem;
+  margin-top: 3rem;
+}
+
+.pzxc {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+}

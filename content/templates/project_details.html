@@ -82,26 +82,87 @@
               <div class="row">
                   <div class="col-md-2"></div>
                     <div class="col-md-8">
-                      <h3 class="D-block mx-auto">Ratings and Reviews</h3>
-                      {% for rating in post.ratings.all %}
-                      {% if forloop.counter is post.ratings.all.count %}
-                      <a class="btn btn-info btn-sm" ><h5>{{ rating.score }}</h5>
-                          <span class="sc">Average Score</span>
-                      </a>
-                      <a class="btn btn-outline-success btn-sm" ><h5>{{ rating.design_average }}</h5>
-                          <span class="sc">Design Average</span>
-                      </a>
-                      <a class="btn btn-outline-primary btn-sm" id="u"><h5>{{ rating.usability_average }}</h5>
-                          <span class="sc">Usability Average</span>
-                      </a>
-                      <a class="btn btn-outline-danger btn-sm" id="c"><h5>{{ rating.content_average }}</h5>
-                          <span class="sc">Content Average</span>
-                      </a>
-                      {% endif %}
-                      {% endfor %}
+                        <div class="d-flex rates-x">
+                            <p></p>
+                            <div>
+                                <div class="ratebox">
+                                    <p>{{portfolio.average_design|stringformat:'f'|slice:"0:4"}}</p>
+                                </div>
+                                <p class="pzxc">design</p>
+                            </div>
+                            <div>
+                                <div class="ratebox">
+                                    <p>{{portfolio.average_usability|stringformat:'f'|slice:"0:4"}}</p>
+                                </div>
+                                <p class="pzxc">usability</p>
+                            </div>
+                           
+                            <div>
+                                <div class="ratebox">
+                                    <p>{{portfolio.average_creativity|stringformat:'f'|slice:"0:4"}}</p>
+                                </div>
+                                <p class="pzxc">creativity</p>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                   <div class="col-md-2"></div>
               </div>
+              <hr>
+              <div class = "row">
+                {% if request.user.is_authenticated %}
+                <div class="">
+                    {% if request.user == portfolio.author.user %}
+                    <div class="container">
+                        <p><strong>You cannot rate your own project ! </strong><i class="fa fa-walking cnm"></i></p>
+                    </div>
+                    {% else %}
+                    {% if request.user in raters %}
+                    <div class="container">
+                        <p><strong>You have already rated this project </strong><i class="fa fa-smile-beam cnm"></i></p>
+                        {% else %}
+                        <button class="btn btn--main btn-center" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Rate
+                            Project</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Rate Project</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            {% for field in form %}
+                                            <div class="form__group form__group">
+                                                <label for="room_name">{{field.label}}</label>
+                                                {{field}}
+                                            </div>
+                                            {% endfor %}
+                
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn--main">Rate</button>
+                                        </form>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                
+                </div>
+                {% else %}
+                <p class="container"><strong class="text-redx">Please login to rate project</strong></p>
+                {% endif %}
+                
+
+              </div>
+
+
   
 
             
