@@ -1,9 +1,9 @@
 # ProjectAwards
 
 ## Description
-##### This is an Awwards clone application whereby uers can upload their projects and have them reviewed and rated by other users. The uers can allow also view projects uploaded by other users, review and rate them. API endpoints are provided through Django REST Framework
+##### This is an [Awwards](https://www.awwwards.com/) clone application whereby uers can upload their projects and have them reviewed and rated by other users. The uers can allow also view projects uploaded by other users, review and rate them. API endpoints are provided through Django REST Framework.
 
-(https://github.com/Rachelnk/ProjectAwards/blob/main/Screenshots/index.png)
+![landing page screenshot](https://github.com/Rachelnk/ProjectAwards/blob/main/Screenshots/index.png)
 
 ## Authors
 #### Rachel Kiarie
