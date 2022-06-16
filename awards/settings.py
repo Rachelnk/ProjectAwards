@@ -138,9 +138,9 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Cloudinary configurations
 cloudinary.config( 
-  cloud_name = "kiaries-gallery",
-  api_key = "343145548373335", 
-  api_secret = "oNEicoCy_M9UqMwBjoRC1fyPAuE",
+  cloud_name = config('CLOUD_NAME'),
+  api_key = config('API_KEY'), 
+  api_secret = config('API_SECRET'),
   secure = True
 )
 
