@@ -49,6 +49,11 @@ class PortfolioTestClass(TestCase):
         self.assertTrue(isinstance(self.portfolio, Portfolio))
 
     def test_save_method(self):
-          self.portfolio.save_Portfolio()
+          self.portfolio.save_portfolio()
           Portfolios = Portfolio.objects.all()
           self.assertTrue(len(Portfolios) > 0)
+          
+    def test_update_portfolio(self):
+        self.portfolio.save_Portfolio()
+        Portfolios = Portfolio.objects.all()
+        self.assertTrue(len(Portfolios) > 0)
