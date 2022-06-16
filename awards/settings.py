@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'content',
     'cloudinary',
     'bootstrap4',
-    'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -90,9 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DB_NAME'),
         'USER' : config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST':'',
-        'PORT':''
+        'PASSWORD': config('DB_PASSWORD')       
     }
 }
 
