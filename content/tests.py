@@ -6,7 +6,7 @@ from .models import Portfolio, Profile, Rating
 
 class TestUserProfile(TestCase):
     def setUp(self):
-        self.new_user=User(first_name='John', last_name='Doe', username='user', email='user@gmail.com',password='user')
+        self.new_user=User(first_name='ray', last_name='kiarie', username='user', email='user@gmail.com',password='123')
         self.new_user.save()
 
         self.profile=Profile(
@@ -23,3 +23,27 @@ class TestUserProfile(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.profile,Profile))
+
+class PortfolioTestClass(TestCase):
+    def setUp(self):
+        user = User.objects.create(
+            username="ray",
+            first_name="ray",
+            last_name="kiarie",
+            email="rayray@gmail.com"
+        )
+
+        self.portfolio = Portfolio(
+            portfolio_image = "default.jpg",
+            title="Project",
+            caption="Test Caption",
+            portfolio_site_url="url.com",
+            repo_url="github.com",
+            programming_language="python",
+            category="for practice",
+            author=user,
+            profile = user.profile
+        )
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.portfolio, Portfolio))
