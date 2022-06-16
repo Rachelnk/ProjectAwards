@@ -52,8 +52,14 @@ class PortfolioTestClass(TestCase):
           self.portfolio.save_portfolio()
           Portfolios = Portfolio.objects.all()
           self.assertTrue(len(Portfolios) > 0)
-          
+
     def test_update_portfolio(self):
-        self.portfolio.save_Portfolio()
+        self.portfolio.save_portfolio()
         Portfolios = Portfolio.objects.all()
         self.assertTrue(len(Portfolios) > 0)
+
+    def test_delete_method(self):
+        self.portfolio.save_portfolio()
+        self.portfolio.delete()
+        Portfolios = Portfolio.objects.all()
+        self.assertTrue(len(Portfolios) == 0)
