@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 {% load static %}
 
 {% block content %}
@@ -11,6 +12,19 @@
         <div class="container">
           
             <h1 class ="text-center" style="margin-top: 80px; font-family: 'Alice', serif;">Project Details</h5>
+                
+                <center>
+                    {% if messages %}
+                        {% for message in messages %} 
+                        <div class="alert {{message.tags}} m-1" role="alert" style="font-size: medium; margin-top: 70px;">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %} 
+                    {% endif %}
+                </center>
                     
            
           <div class="card" style="margin-top: 50px ;">
@@ -73,91 +87,132 @@
                       </li>
                       {% endif %}
                   </ul>
-              </div>                
-                
-                  <h6> <span style="font-weight: lighter; color: green; margin-bottom: 15px;" class=""> Language: <br> {{ portfolio.programming_language }}</span> </h6>
-                
+              </div>            
+                  <h6> <span style="font-weight: lighter; color: green; margin-bottom: 15px; margin-top: 25px;" class=""> Language: {{ portfolio.programming_language }}</span> </h6>
+                  <hr>                
               </div>
-              
-              <div class="row">
-                  <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <div class="d-flex rates-x">
-                            <p></p>
-                            <div>
-                                <div class="ratebox">
-                                    <p>{{portfolio.average_design|stringformat:'f'|slice:"0:4"}}</p>
+
+              <div class="container-fluid" style="margin-top: 50px;">
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                        <div class="bg-white rounded shadow p-4 mb-4 clearfix graph-star-rating">
+                            <h5 class="mb-1 text-center">Ratings and Reviews</h5>
+                            {% if ratings %}
+                                {% for rating in ratings %}
+                                    <div class="graph-star-rating-header">
+                                        <h1 class="text-black mb-4 mt-2 text-center" style="font-size: 108px;">{{ rating.avarage_rating }}.0</h1>
+                                    </div>
+                                    {% if ratings_count|length == 0 %}
+                                    <p class="text-center">Based on {{ ratings_count|length }} reviews</p>
+                                    {% elif ratings_count|length == 1 %}
+                                    <p class="text-center">Based on {{ ratings_count|length }} review</p>
+                                    {% else %}
+                                    <p class="text-center">Based on {{ ratings_count|length }} reviews</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <div class="graph-star-rating-header">
+                                    <h1 class="text-black mb-4 mt-2 text-center" style="font-size: 108px;">0.0</h1>
+                                    <p class="text-center">Based on {{ ratings_count|length  }} reviews</p>
                                 </div>
-                                <p class="pzxc">design</p>
-                            </div>
-                            <div>
-                                <div class="ratebox">
-                                    <p>{{portfolio.average_usability|stringformat:'f'|slice:"0:4"}}</p>
-                                </div>
-                                <p class="pzxc">usability</p>
-                            </div>
-                           
-                            <div>
-                                <div class="ratebox">
-                                    <p>{{portfolio.average_creativity|stringformat:'f'|slice:"0:4"}}</p>
-                                </div>
-                                <p class="pzxc">creativity</p>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
-                    </div>
-                  <div class="col-md-2"></div>
-              </div>
-              <hr>
-              <div class = "row">
-                {% if request.user.is_authenticated %}
-                <div class="">
-                    {% if request.user == portfolio.author.user %}
-                    <div class="container">
-                        <p><strong>You cannot rate your own project ! </strong><i class="fa fa-walking cnm"></i></p>
-                    </div>
-                    {% else %}
-                    {% if request.user in raters %}
-                    <div class="container">
-                        <p><strong>You have already rated this project </strong><i class="fa fa-smile-beam cnm"></i></p>
-                        {% else %}
-                        <button class="btn btn--main btn-center" type="button" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Rate
-                            Project</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Rate Project</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="post">
-                                            {% csrf_token %}
-                                            {% for field in form %}
-                                            <div class="form__group form__group">
-                                                <label for="room_name">{{field.label}}</label>
-                                                {{field}}
+        
+                    <div class="col-md-7">
+                        <div class="bg-white rounded shadow p-4 mb-4 restaurant-detailed-ratings-and-reviews">
+                            {% if user.is_authenticated %}
+                            <a href="#" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal{{ portfolio.id }}">Add A Review</a>
+                            {% else %}
+                            <a href="{% url 'Login' %}" name="Login" class="btn btn-outline-primary btn-sm float-right">Log In To Review & Coment</a>
+                            {% endif %}
+                            <h5 class="mb-1">All Reviews</h5>
+                            <div class="reviews-members pt-4 pb-4">
+                                {% if ratings %}
+                                    {% for rating in ratings %}
+                                    <div class="media">
+                                        <a href="#">
+                                            <img alt="Generic placeholder image" src="{{ rating.profile.profile_image.url }}" class="mr-3 rounded-pill">
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="reviews-members-header">
+                                                <h6 class="mb-1"><a class="text-black" href="#"><b>{{ rating.author.first_name }}  {{ rating.author.last_name }}</b></a></h6>
+                                                <p class="text-gray">{{ rating.date_created }}</p>
                                             </div>
-                                            {% endfor %}
-                
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn--main">Rate</button>
-                                        </form>
+                                            <div class="reviews-members-body">
+                                                <p>{{ rating.comment }}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                
+                                    <hr>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="col-sm-12" style="margin-top: 20px;">
+                                    <div class="content text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M5 18v3.766l1.515-.909L11.277 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h1zM4 8h12v8h-5.277L7 18.234V16H4V8z"></path><path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path></svg>
+                                        <br>
+                                        <h4 class="text-dark py-3">Be The First To Review</h4>
+                                    </div> 
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                    {% endif %}
-                    {% endif %}
-                
                 </div>
-                {% else %}
-                <p class="container"><strong class="text-redx">Please login to rate project</strong></p>
-                {% endif %}
+            </div>
+    
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{ portfolio.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ portfolio.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <form action="{% url 'projectrating' portfolio.title %}" method="POST">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel{{ portfolio.id }}">Review & Portfolio Rating</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="Comment">Comment</label>
+                                    <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label for="Design">Design</label>
+                                            <input type="number" class="form-control" name="design_rating" min="0" max="10" value="0">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label for="Usability">Usability</label>
+                                            <input type="number" class="form-control" name="usability_rating" min="0" max="10" value="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label for="Content">Content</label>
+                                            <input type="number" class="form-control" name="content_rating" min="0" max="10" value="0">
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Rate</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+              
+              
                 
 
               </div>

@@ -61,10 +61,7 @@ class Portfolio(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Profile', null =True)
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created', null= True)
     date_updated = models.DateTimeField(auto_now=True, verbose_name='Date Updated', null= True)
-    average_design = models.FloatField(blank=True, null=True)
-    average_usability = models.FloatField(blank=True, null=True)
-    average_creativity = models.FloatField(blank=True, null=True)
-    average_score = models.FloatField( blank=True, null=True)
+    
 
     def __str__(self):
       return str(self.title)
@@ -92,7 +89,7 @@ class Rating(models.Model):
     usability_rating = models.IntegerField(default=0, null=False)
     content_rating = models.IntegerField(default=0, null=False)
     avarage_rating = models.IntegerField(default=0, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Profile')
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created')

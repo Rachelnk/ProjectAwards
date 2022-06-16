@@ -17,5 +17,6 @@ urlpatterns = [
   path('project/<str:title>/details', views.portfoliodetails, name="project_details"),
   path('profile/<str:username>/project/<str:title>/delete', views.deleteportfolio, name="deleteproject"),
   path('profile/<str:username>/project/<int:id>/edit', views.editportfolio, name="EditPortfolio"),
+  path('portfolio/<str:title>/rate', views.portfoliorating, name="projectrating")
 
 ]
