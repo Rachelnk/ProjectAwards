@@ -12,7 +12,7 @@ class TestUserProfile(TestCase):
         self.profile=Profile(
             author=self.new_user, 
             bio='about me', 
-            profile_image='profile.jpg',
+            profile_pic ='profile.jpg',
             location = 'Kenya',
             personal_website = 'mysite.com',
             github_link = 'github.com',
@@ -47,3 +47,8 @@ class PortfolioTestClass(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.portfolio, Portfolio))
+
+    def test_save_method(self):
+          self.portfolio.save_Portfolio()
+          Portfolios = Portfolio.objects.all()
+          self.assertTrue(len(Portfolios) > 0)
