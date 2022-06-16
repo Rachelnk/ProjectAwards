@@ -129,9 +129,16 @@
                                 {% if ratings %}
                                     {% for rating in ratings %}
                                     <div class="media">
+                                        {% if rating.profile.profile_image %}
                                         <a href="#">
-                                            <img alt="Generic placeholder image" src="{{ rating.profile.profile_image.url }}" class="mr-3 rounded-pill">
+                                            <img alt="generic profile image" src="{{ rating.profile.profile_image.url }}" class="mr-3 rounded-pill">
                                         </a>
+                                        {% else %}
+                                        <a href="#">
+                                            <img alt="profile image" src="https://cdn-icons.flaticon.com/png/128/552/premium/552848.png?token=exp=1655416599~hmac=c78d25b86a0cb42d9cfd078d55a394e4" class="mr-3 rounded-pill" width="40" height="40">
+                                        </a>
+                                        {% endif %}
+
                                         <div class="media-body">
                                             <div class="reviews-members-header">
                                                 <h6 class="mb-1"><a class="text-black" href="#"><b>{{ rating.author.first_name }}  {{ rating.author.last_name }}</b></a></h6>
