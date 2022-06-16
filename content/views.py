@@ -9,6 +9,11 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Portfolio, Profile, Rating
 from django.contrib.auth import update_session_auth_hash
+#.............
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer, PortfoioSerializer
+
 
 # Create your views here.
 
