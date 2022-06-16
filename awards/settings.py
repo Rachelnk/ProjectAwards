@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -138,9 +138,9 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Cloudinary configurations
 cloudinary.config( 
-  cloud_name = config('CLOUD_NAME'),
-  api_key = config('API_KEY'), 
-  api_secret = config('API_SECRET'),
+  cloud_name = 'kiaries-gallery',
+  api_key = '343145548373335', 
+  api_secret = 'oNEicoCy_M9UqMwBjoRC1fyPAuE',
   secure = True
 )
 
