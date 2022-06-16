@@ -47,6 +47,9 @@
 * CSS
 * PostgreSQL
 
+## Bugs
+##### There are no known bugs at the moment. If you come across any please feel free to reach out and report them.
+
 ## Support and contact details
 ##### You can reach out via `rachael.kiarie@student.moringaschool.com` 
  ### License
