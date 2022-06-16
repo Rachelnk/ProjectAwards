@@ -228,6 +228,11 @@ def portfoliorating(request,title):
         messages.error(request, "Your Review Wasn't Created!")
         return redirect('project_details', title=title)
 
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)
 
 
 
